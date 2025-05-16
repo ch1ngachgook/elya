@@ -598,6 +598,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/room/:id" element={<PrivateRoute><RoomPage /></PrivateRoute>} />
+          <Route path="/room-control/:id" element={<PrivateRoute requiredRole="admin"><RoomControlPage /></PrivateRoute>} />
           <Route path="/bookings" element={<PrivateRoute><MyBookings /></PrivateRoute>} />
           <Route path="/admin" element={<PrivateRoute requiredRole="admin"><AdminPage /></PrivateRoute>} />
         </Routes>
