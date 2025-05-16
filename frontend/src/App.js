@@ -36,24 +36,44 @@ const Header = () => {
   };
   
   return (
-    <header className="bg-blue-600 text-white shadow-md">
+    <header className="eleon-gradient text-white shadow-lg">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">HotelKey</Link>
+        <Link to="/" className="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+          </svg>
+          <span className="text-2xl font-bold tracking-wider">ELEON</span>
+        </Link>
         
-        <nav className="flex space-x-4">
-          <Link to="/" className="hover:text-blue-200">Главная</Link>
+        <nav className="flex items-center space-x-6">
+          <Link to="/" className="hover:text-[#1abc9c] transition duration-200 font-medium">Главная</Link>
           {token ? (
             <>
-              <Link to="/bookings" className="hover:text-blue-200">Мои бронирования</Link>
+              <Link to="/bookings" className="hover:text-[#1abc9c] transition duration-200 font-medium">Мои бронирования</Link>
               {user?.role === 'admin' && (
-                <Link to="/admin" className="hover:text-blue-200">Администратор</Link>
+                <Link to="/admin" className="hover:text-[#1abc9c] transition duration-200 font-medium">Управление</Link>
               )}
-              <button onClick={handleLogout} className="hover:text-blue-200">Выход</button>
+              <div className="flex items-center space-x-2">
+                <span className="text-sm opacity-80">
+                  {user?.full_name}
+                </span>
+                <button 
+                  onClick={handleLogout} 
+                  className="bg-[#e74c3c] hover:bg-[#c0392b] text-white py-1 px-3 rounded-full text-sm transition duration-200"
+                >
+                  Выход
+                </button>
+              </div>
             </>
           ) : (
             <>
-              <Link to="/login" className="hover:text-blue-200">Вход</Link>
-              <Link to="/register" className="hover:text-blue-200">Регистрация</Link>
+              <Link to="/login" className="hover:text-[#1abc9c] transition duration-200 font-medium">Вход</Link>
+              <Link 
+                to="/register" 
+                className="bg-[#1abc9c] hover:bg-[#16a085] text-white py-1 px-3 rounded-full text-sm transition duration-200"
+              >
+                Регистрация
+              </Link>
             </>
           )}
         </nav>
