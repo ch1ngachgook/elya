@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #2c3e50;
+  --secondary: #1abc9c;
+  --accent: #3498db;
+  --danger: #e74c3c;
+  --success: #2ecc71;
+  --warning: #f39c12;
+  --light: #ecf0f1;
+  --dark: #2c3e50;
+  --gray: #95a5a6;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -9,7 +21,7 @@ body {
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
 }
 
 code {
@@ -23,19 +35,23 @@ code {
   }
 
   .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700;
+    @apply bg-[#2c3e50] text-white hover:bg-[#1e2a36];
   }
 
   .btn-secondary {
-    @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+    @apply bg-[#1abc9c] text-white hover:bg-[#16a085];
   }
 
   .btn-danger {
-    @apply bg-red-600 text-white hover:bg-red-700;
+    @apply bg-[#e74c3c] text-white hover:bg-[#c0392b];
   }
 
   .btn-success {
-    @apply bg-green-600 text-white hover:bg-green-700;
+    @apply bg-[#2ecc71] text-white hover:bg-[#27ae60];
+  }
+
+  .btn-warning {
+    @apply bg-[#f39c12] text-white hover:bg-[#d35400];
   }
 
   .card {
@@ -43,10 +59,39 @@ code {
   }
 
   .input {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3498db];
   }
 
   .label {
     @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  /* ELEON Brand Specific Classes */
+  .eleon-heading {
+    @apply text-[#2c3e50] font-bold;
+  }
+  
+  .eleon-gradient {
+    @apply bg-gradient-to-r from-[#2c3e50] to-[#3498db];
+  }
+  
+  .eleon-card {
+    @apply bg-white rounded-lg shadow-md p-6 border-l-4 border-[#1abc9c];
+  }
+  
+  .eleon-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-paid {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .badge-pending {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .badge-cancelled {
+    @apply bg-red-100 text-red-800;
   }
 }
