@@ -1,0 +1,21 @@
+class PaymentInfo(BaseModel):
+    booking_id: str
+    amount: float
+    currency: str = "RUB"
+    card_number: str
+    expiry_date: str
+    cvc: str
+    cardholder_name: str
+
+class PaymentResponse(BaseModel):
+    payment_id: str
+    booking_id: str
+    status: str
+    amount: float
+    currency: str
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class BookingStageUpdate(BaseModel):
+    booking_id: str
+    stage: str  # One of created, confirmed, paid, checked_in, checked_out
+    metadata: Optional[Dict[str, Any]] = None
