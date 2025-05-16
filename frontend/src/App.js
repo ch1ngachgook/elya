@@ -8,6 +8,7 @@ import { useAuthStore, useRoomStore } from "./store/useStore";
 // Импортируем страницы и компоненты
 import RoomPage from "./pages/RoomPage";
 import AdminPage from "./pages/AdminPage";
+import RoomControlPage from "./pages/RoomControlPage";
 
 // Компонент аутентификации
 const PrivateRoute = ({ children, requiredRole = null }) => {
