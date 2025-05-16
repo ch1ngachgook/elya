@@ -111,7 +111,11 @@ class Booking(BaseModel):
     check_in_date: datetime
     check_out_date: datetime
     created_at: datetime = Field(default_factory=datetime.utcnow)
-    status: str = "active"  # active, completed, cancelled
+    status: str = "pending"  # pending, confirmed, cancelled, completed, paid
+    payment_status: str = "pending"  # pending, paid, refunded
+    payment_id: Optional[str] = None
+    amount: float = 0.0
+    booking_stages: List[str] = ["created"]  # created, confirmed, paid, checked_in, checked_out
 
 class BookingCreate(BaseModel):
     room_id: str
