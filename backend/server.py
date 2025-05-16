@@ -38,6 +38,14 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 hours
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/token")
 
+# Контроллер для ELEON
+ELEON_CONTROLLER = {
+    "ip": "192.168.1.100",
+    "mac": "FE:E8:C0:D4:57:14",
+    "ble_name": "ROOM_7",
+    "token": "CM6wqJB5blIMvBKQ"
+}
+
 # Enums
 class RoomStatus(str, Enum):
     AVAILABLE = "available"
