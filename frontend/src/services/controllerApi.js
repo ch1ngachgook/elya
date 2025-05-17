@@ -133,8 +133,8 @@ class ControllerAPI {
       const device = await navigator.bluetooth.requestDevice({
         filters: [
           { services: [BLE_SERVICE_UUID] },
-          // Добавим фильтр по имени, если известно имя устройства
-          // { name: 'HotelController' }
+          // Используем имя устройства из конфигурации
+          { name: this.controllerInfo.bleName }
         ],
         optionalServices: [BLE_SERVICE_UUID]
       });
