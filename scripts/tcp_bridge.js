@@ -114,10 +114,48 @@ wss.on('connection', (ws) => {
     ws.send(JSON.stringify({
       type: 'connection',
       status: 'error',
-      message: 'Ошибка соединения с контроллером'
+      message: `Ошибка соединения с контроллером: ${error.message}. Проверьте, что ваш компьютер находится в подсети 192.168.1.X.`
     }));
     
     isConnected = false;
+
+    // Имитация успешного подключения для тестирования (mock-режим)
+    console.log('Переключение в режим симуляции (mock)');
+    
+    // Отправляем виртуальное сообщение о успешном подключении
+    setTimeout(() => {
+      ws.send(JSON.stringify({
+        type: 'connection',
+        status: 'mock_connected',
+        message: 'Подключено к виртуальному контроллеру (режим симуляции)'
+      }));
+      
+      // Отправляем виртуальную информацию о контроллере
+      ws.send(JSON.stringify({
+        type: 'info',
+        mac: CONTROLLER_INFO.mac,
+        ip: CONTROLLER_INFO.ip,
+        ble_name: CONTROLLER_INFO.bleName,
+        token: CONTROLLER_INFO.token,
+        version: '1.0.0-mock'
+      }));
+      
+      // Отправляем виртуальное состояние комнаты
+      ws.send(JSON.stringify({
+        type: 'state',
+        state: {
+          lightsOn: false,
+          doorLocked: true,
+          channel1: false,
+          channel2: false,
+          temperature: 23,
+          humidity: 45,
+          pressure: 1013
+        }
+      }));
+      
+      isConnected = true; // Помечаем как подключенное в режиме симуляции
+    }, 1000);
   });
   
   // Обработка закрытия TCP соединения
