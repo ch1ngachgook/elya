@@ -8,6 +8,14 @@ const CONTROLLER_IP = '192.168.1.100';
 const CONTROLLER_PORT = 7000;
 const CONTROLLER_TOKEN = 'SNQaq6KVIQQMHR3x';
 
+// Информация о контроллере
+const CONTROLLER_INFO = {
+  ip: CONTROLLER_IP,
+  mac: 'A2:DD:6C:98:2E:58',
+  bleName: 'ROOM_19',
+  token: CONTROLLER_TOKEN
+};
+
 // Конфигурация WebSocket сервера
 const WS_PORT = 7001;
 
