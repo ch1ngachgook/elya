@@ -225,9 +225,10 @@ class ControllerAPI {
     // Сохраняем информацию о контроллере
     if (data.type === 'info') {
       this.controllerInfo = {
-        mac: data.mac,
-        ip: data.ip,
-        bleName: data.ble_name,
+        mac: data.mac || CONTROLLER_INFO.mac,
+        ip: data.ip || CONTROLLER_INFO.ip,
+        bleName: data.ble_name || CONTROLLER_INFO.bleName,
+        token: data.token || CONTROLLER_INFO.token,
         version: data.version
       };
     }
