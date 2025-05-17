@@ -8,6 +8,14 @@ const TCP_BRIDGE_URL = 'ws://localhost:7001'; // URL WebSocket моста
 const BLE_SERVICE_UUID = '0000ff00-0000-1000-8000-00805f9b34fb'; // Основной сервис BLE
 const BLE_CHARACTERISTIC_UUID = '0000ff02-0000-1000-8000-00805f9b34fb'; // Характеристика команд
 
+// Информация о контроллере
+const CONTROLLER_INFO = {
+  ip: '192.168.1.100',
+  mac: 'A2:DD:6C:98:2E:58',
+  bleName: 'ROOM_19',
+  token: 'SNQaq6KVIQQMHR3x'
+};
+
 // Команды контроллера
 export const ControllerCommand = {
   GET_INFO: 'get_info',        // Запрос информации о контроллере
