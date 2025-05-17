@@ -44,12 +44,12 @@ class ControllerAPI {
     this.wsConnection = null;
     this.bleDevice = null;
     this.bleCharacteristic = null;
-    this.controllerInfo = null;
+    this.controllerInfo = CONTROLLER_INFO; // Используем предопределенную информацию
     this.onStateUpdate = null; // Колбэк для обновления состояния UI
     this.connectionTimeout = null;
     this.reconnectAttempts = 0;
     this.maxReconnectAttempts = 5;
-    this.token = localStorage.getItem('controller_token') || null;
+    this.token = CONTROLLER_INFO.token || localStorage.getItem('controller_token') || null;
   }
 
   // Инициализация соединения
