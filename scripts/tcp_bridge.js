@@ -31,8 +31,23 @@ wss.on('connection', (ws) => {
   const tcpClient = new net.Socket();
   let isConnected = false;
   
+  // Вывод расширенной отладочной информации о подключении
+  console.log(`Попытка подключения к контроллеру: ${CONTROLLER_IP}:${CONTROLLER_PORT}`);
+  console.log('Локальный сетевой интерфейс:');
+  require('child_process').exec('ifconfig', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    console.log(stdout);
+  });
+  
   // Обработка подключения к контроллеру
-  tcpClient.connect(CONTROLLER_PORT, CONTROLLER_IP, () => {
+  tcpClient.connect({
+    port: CONTROLLER_PORT,
+    host: CONTROLLER_IP,
+    timeout: 10000 // Увеличиваем таймаут подключения до 10 секунд
+  }, () => {
     console.log(`Подключено к контроллеру ${CONTROLLER_IP}:${CONTROLLER_PORT}`);
     isConnected = true;
     
