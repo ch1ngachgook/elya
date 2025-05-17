@@ -185,13 +185,65 @@ wss.on('connection', (ws) => {
         data.token = CONTROLLER_TOKEN;
       }
       
-      // Отправляем данные контроллеру, если соединение активно
+      // Обработка в зависимости от типа соединения
       if (isConnected) {
-        tcpClient.write(JSON.stringify(data) + '\n');
+        // Если мы в режиме симуляции, эмулируем ответы контроллера
+        if (data.type === 'get_state') {
+          // Имитация запроса состояния
+          setTimeout(() => {
+            ws.send(JSON.stringify({
+              type: 'state',
+              state: {
+                lightsOn: Math.random() > 0.5, // Случайное состояние для тестирования
+                doorLocked: Math.random() > 0.5,
+                channel1: Math.random() > 0.5,
+                channel2: Math.random() > 0.5,
+                temperature: Math.floor(20 + Math.random() * 10), // 20-30 градусов
+                humidity: Math.floor(30 + Math.random() * 40), // 30-70%
+                pressure: Math.floor(980 + Math.random() * 50) // 980-1030 гПа
+              }
+            }));
+          }, 100);
+        } 
+        else if (data.type === 'set_state') {
+          // Имитация изменения состояния
+          setTimeout(() => {
+            ws.send(JSON.stringify({
+              type: 'state',
+              state: {
+                ...data.state, // Возвращаем то же состояние, что было отправлено
+                temperature: Math.floor(20 + Math.random() * 10),
+                humidity: Math.floor(30 + Math.random() * 40),
+                pressure: Math.floor(980 + Math.random() * 50)
+              }
+            }));
+          }, 100);
+        } 
+        else if (data.type === 'get_info') {
+          // Имитация запроса информации
+          setTimeout(() => {
+            ws.send(JSON.stringify({
+              type: 'info',
+              mac: CONTROLLER_INFO.mac,
+              ip: CONTROLLER_INFO.ip,
+              ble_name: CONTROLLER_INFO.bleName,
+              token: CONTROLLER_INFO.token,
+              version: '1.0.0-mock'
+            }));
+          }, 100);
+        } 
+        else {
+          // Реальный режим - отправляем данные контроллеру
+          tcpClient.write(JSON.stringify(data) + '\n');
+        }
       } else {
         // Пытаемся переподключиться
         console.log('Попытка переподключения к контроллеру...');
-        tcpClient.connect(CONTROLLER_PORT, CONTROLLER_IP);
+        tcpClient.connect({
+          port: CONTROLLER_PORT,
+          host: CONTROLLER_IP,
+          timeout: 5000
+        });
         
         // Помещаем сообщение в очередь для отправки после подключения
         tcpClient.once('connect', () => {
